@@ -1,0 +1,65 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+
+    <style>
+
+        h2{
+            font-family: "MV Boli";
+            font-size: 50px;
+            font-style: italic;
+        }
+        h7{
+            font-family: "MV Boli";
+            font-size: 45px;
+
+        }
+        h6{
+            font-family: "MV Boli";
+            font-size: 35px;
+
+        }
+        h4{
+            font-family: "MV Boli";
+            font-size: 20px;
+        }
+        h5{
+            font-family: "MV Boli";
+            font-size: 20px;
+            color: #a71d5d;
+        }
+    </style>
+
+    <div class="container" >
+        <div class="panel panel-primary" style="top:180px;height: auto; width: 750px;right: -350px;position: relative;border-color: black;background-color: rgba(255,215,0,0);border-color:rgba(255,215,0,0) ">
+            <div class="panel-body">
+
+
+                    {% if app.user.actif==0  %}
+                        <div class="imgcontainer">
+                            <img src="{{ asset('img/inactif.png') }}" class="avatar"/>
+
+                        </div>
+                        <h4>Salut</h4> <h5>{{ app.user.prenom}}</h5><h4>votre compte est desormé innactif, un mail d'activation sera envoyé à</h4>
+                        <h5>{{ app.user.email }}</h5>
+                    <h4>Merci pour votre patience. Cordialement l'equipe e-learning</h4>
+                    {% endif %}
+                {% if app.user.actif==1  %}
+                    <div class="imgcontainer">
+                        <img style="width: 500px; height: 200px;"
+                         src="{{ asset('img/iset.jpg') }}" class="avatar"/>
+
+                    </div>
+                    <h4>Salut</h4> <h5>{{ app.user.prenom}}</h5><h4>votre compte est actif</h4>
+                    <h5>Votre e-mail est {{ app.user.email }}</h5>
+                    <h4>Merci pour votre patience. Cordialement l'equipe e-learning</h4>
+                {% endif %}
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+{% endblock %}

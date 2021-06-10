@@ -1,0 +1,111 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <style>
+
+        body {
+
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+            margin: 20px;
+        }
+        .container {
+            padding: 16px;
+            width: 80%;
+            border: 1px solid #ccc;
+            margin: 24px 0 12px 50px;
+        }
+
+        img.avatar {
+            width: 3%;
+            border-radius: 50%;
+        }
+    </style>
+
+
+    <div class="container">
+        <br>
+
+        <div class="w3-bar w3-black">
+          <h2>
+              {% if is_granted("ROLE_EDITOR") %}
+             <div class="w3-right"><a  href="{{path('addsectionlink',{id: matiere.id})}}" ><i class="fa fa-plus-circle" aria-hidden="true" fa-3x></i>  </a>  </div>
+              <div class="w3-right"><a  href="{{path('courssectionslink',{id: matiere.id})}}" ><i class="fa fa-refresh" aria-hidden="true"></i>  </a>  </div>
+              {% endif %}
+          </h2>
+            <h2>Les sections du :  {{ matiere.libelle }}</h2>
+        </div>
+        <br>
+        {% for section in lessections %}
+        <br>
+        <div class="w3-bar w3-gray">
+            {% if is_granted("ROLE_EDITOR") %}
+                <div class="w3-right"><a  href="{{path('supprimerdoclink',{id: section.id,idm: matiere.id})}}" ><i class="fa fa-trash" aria-hidden="true"></i>  </a>  </div>
+            {% endif %}
+                <li><a href="{{path('editersectionlink',{id: section.id})}}"><i class="fa fa-book"></i> {{section.libelle}} </a>
+                </div>
+
+        <div class="container">
+
+                    {% for document in section.documents %}
+                        {% if is_granted("ROLE_EDITOR") %}
+                        <div class="w3-right"><a  href="{{path('supprimerdoclink',{id: document.id,idm: matiere.id})}}" ><i class="fa fa-trash" aria-hidden="true"></i>  </a>  </div>
+                         {% endif %}
+                        {% if document.extension == "doc" %}
+                            <li><a href="{{ path('telechargerdoclink',{id: document.id,idm: matiere.id}) }}"><img src="{{ asset('img/icoWord.jpg') }}" class="avatar"/> {{ document.name }}</a></li>
+                        {% endif %}
+                        {% if document.extension == "docx" %}
+                            <li><a href="{{ path('telechargerdoclink',{id: document.id,idm: matiere.id}) }}"><img src="{{ asset('img/icoWord.jpg') }}" class="avatar"/> {{ document.name }}</a></li>
+                        {% endif %}
+                        {% if document.extension == "pdf" %}
+                            <li><a href="{{ path('telechargerdoclink',{id: document.id,idm: matiere.id}) }}"><img src="{{ asset('img/icoPdf.png') }}" class="avatar"/> {{ document.name }}</a></li>
+                        {% endif %}
+                        {% if document.extension == "zip" %}
+                            <li><a href="{{ path('telechargerdoclink',{id: document.id,idm: matiere.id}) }}"><img src="{{ asset('img/icoRar.jpg') }}" class="avatar"/> {{ document.name }}</a></li>
+                        {% endif %}
+                        {% if document.extension == "rar" %}
+                            <li><a href="{{ path('telechargerdoclink',{id: document.id,idm: matiere.id}) }}"><img src="{{ asset('img/icoRar.jpg') }}" class="avatar"/> {{ document.name }}</a></li>
+                        {% endif %}
+                        {% if document.extension == "xls" %}
+                            <li><a href="{{ path('telechargerdoclink',{id: document.id,idm: matiere.id}) }}"><img src="{{ asset('img/icoExcel.png') }}" class="avatar"/> {{ document.name }}</a></li>
+                        {% endif %}
+                        {% if document.extension == "xlsx" %}
+                            <li><a href="{{ path('telechargerdoclink',{id: document.id,idm: matiere.id}) }}"><img src="{{ asset('img/icoExcel.png') }}" class="avatar"/> {{ document.name }}</a></li>
+                        {% endif %}
+                        {% if document.extension == "txt" %}
+                            <li><a href="{{ path('telechargerdoclink',{id: document.id,idm: matiere.id}) }}"><img src="{{ asset('img/icoText.png') }}" class="avatar"/> {{ document.name }}</a></li>
+                        {% endif %}
+                        {% if document.extension == "ppt" %}
+                            <li><a href="{{ path('telechargerdoclink',{id: document.id,idm: matiere.id}) }}"><img src="{{ asset('img/icoPpt.png') }}" class="avatar"/> {{ document.name }}</a></li>
+                        {% endif %}
+                        {% if document.extension == "pptx" %}
+                            <li><a href="{{ path('telechargerdoclink',{id: document.id,idm: matiere.id}) }}"><img src="{{ asset('img/icoPpt.png') }}" class="avatar"/> {{ document.name }}</a></li>
+                        {% endif %}
+                        {% if document.extension == "exe" %}
+                            <li><a href="{{ path('telechargerdoclink',{id: document.id,idm: matiere.id}) }}"><img src="{{ asset('img/icoExe.png') }}" class="avatar"/> {{ document.name }}</a></li>
+                        {% endif %}
+
+                {% endfor %}
+        </div>
+                </li>
+            {#<span onclick="this.parentElement.style.display='none'" class="w3-bar w3-blue">×</span>
+                                <span class="w3-bar-item w3-button w3-white w3-right"><a  href="{{path('editersectionlink',{id: section.id})}}" >Editer</a></span>
+                                       #}
+        {% else %}
+            <ul class="b">
+                <li>Aucune section</li>
+        {% endfor %}
+    </div>
+
+    <script>
+        // Add the following code if you want the name of the file appear on select
+        $(".custom-file-input").on("change", function() {
+            var fileName = $(this).val().split("\\").pop();
+            $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+        });
+    </script>
+{% endblock %}
+

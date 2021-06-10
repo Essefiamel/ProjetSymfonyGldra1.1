@@ -1,0 +1,92 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <style>
+        .container {
+            padding: 16px;
+            width: 80%;
+            border: 1px solid #ccc;
+            margin: 24px 0 12px 50px;
+        }
+        form_container
+        {
+            width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        span.form_column
+        {
+            float: left;
+            width: 200px;
+            text-align: left;
+        }
+
+        span.form_label
+        {
+            width: 50px;
+            text-align: right;
+
+        }
+
+        form_row
+        {
+            font-size: large;
+            margin-top: 10px;
+            margin-bottom: 5px;
+            text-align: left;
+            clear: left;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+    </style>
+    <div class="panel panel-primary">
+
+        <div class="panel-body">
+
+            <div class="container">
+                <h2>Ajouter / Editer Section</h2>
+                {{ form_start(form) }}
+                <div class="container">
+                    {{ form_row(form.Tuteur,{'label': 'Tuteur','attr':{'placeholder': 'Tuteur'}}) }}
+                </div>
+                <div class="container">
+                    {{ form_row(form.Niveau,{'label': 'Niveau','attr':{'placeholder': 'Niveau'}}) }}
+                </div>
+                <div class="container">
+                    {{ form_row(form.Matiere,{'label': 'Matiere','attr':{'placeholder': 'Tuteur'}}) }}
+                </div>
+                <div class="container">
+                    {{ form_row(form.libelle,{'label': 'Libéllé','attr':{'placeholder': 'Libellé'}}) }}
+                    {{ form_row(form.description,{'label': 'Description','attr':{'placeholder': 'Description'}}) }}
+                    {{ form_row(form.documents,{'label': 'pièces jointes','attr':{'placeholder': 'joindre'}}) }}
+                </div>
+
+                <button type="submit" class="btn btn-success">Valider</button>
+            </div>
+
+        </div>
+    </div>
+
+
+
+
+
+    </div>
+
+    <script>
+        // Add the following code if you want the name of the file appear on select
+        $(".custom-file-input").on("change", function() {
+            var fileName = $(this).val().split("\\").pop();
+            $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+        });
+    </script>
+
+    {{ form_end(form) }}
+
+{% endblock %}
+

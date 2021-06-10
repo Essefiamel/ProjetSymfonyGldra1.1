@@ -1,0 +1,148 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <style>
+
+        body {
+
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+            margin: 20px;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        #myInput {
+            background-repeat: no-repeat;
+            width: 100%;
+            font-size: 16px;
+            padding: 12px 20px 12px 40px;
+            border: 1px solid #ddd;
+            margin-bottom: 12px;
+
+
+        }
+        .container {
+            padding: 16px;
+            width: 80%;
+            border: 1px solid #ccc;
+            margin: 24px 0 12px 50px;
+        }
+        .main {
+            width: 50%;
+            margin: 50px auto;
+            left: 20px;
+            position: relative;
+        }
+
+        /* Bootstrap 3 text input with search icon */
+
+        .has-search .form-control-feedback {
+            right: 100px;
+            left: 0;
+            color: #ccc;
+        }
+
+        .has-search .form-control {
+            padding-right: 12px;
+            padding-left: 34px;
+
+        }
+
+    </style>
+    <div class="panel panel-primary">
+
+        <div class="panel-body">
+
+            <div class="container">
+                <h2>Editer/Ajouter Niveau</h2>
+                {{ form_start(form) }}
+                {{ form_row(form.Libelle,{'label': 'Libellé','attr':{'placeholder': 'Libellé niveau'}}) }}
+                {{ form_row(form.description,{'label': 'Description','attr':{'placeholder': 'Description'}}) }}
+                <div class="container">
+                    {{ form_row(form.Matiere,{'label': 'Matiere','attr':{'placeholder': 'Cours'}}) }}
+                </div>
+                <button type="submit" class="btn btn-success">Valider</button>
+                <br>
+
+            </div>
+
+        </div>
+    </div>
+
+
+    </div>
+    {{ form_end(form) }}
+
+    <div class="main">
+
+        <!-- Actual search box -->
+        <div class="form-group has-feedback has-search" style=" left: -400px;
+        position: relative;">
+            <span class="glyphicon glyphicon-search form-control-feedback"></span>
+            <input type="text" id="myInput" onkeyup="myFunction()" class="form-control" placeholder="Récherche multi-critères (id, département, libellé)">
+        </div>
+        <h2>Liste des etudiants</h2>
+    </div>
+    <table id="myTable" class="table" border="1">
+        <thead class="thead-dark">
+        <tr>
+
+            <th> Id-User</th>
+            <th> Id-Etudiant</th>
+            <th> Matricule</th>
+            <th> Niveau</th>
+            <th> Nom</th>
+            <th> Prénom</th>
+            <th> </th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for etudiant in lesetudiants %}
+            <tr>
+                <td>{{etudiant.User.id}}</td>
+                <td>{{etudiant.id}}</td>
+                <td>{{etudiant.matricule}}</td>
+                <td>{{etudiant.Niveau.libelle}}</td>
+                <td>{{etudiant.User.nom}}</td>
+                <td>{{etudiant.User.prenom}}</td>
+                <td>
+                    <a class="btn btn-danger" style="background-color: #565656;border-color: #565656" href="{{'#'}}" onclick="return confirm('Etes vous sure de vouloir supprimer ?')">Supprimer</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">Aucun etudiant</td>
+            </tr>
+        {% endfor %}
+
+    </table>
+    <script>
+        function myFunction() {
+            var input, filter, table, tr, td0,td1,td2,td3,td4, i, txtValue0,txtValue1;
+            input = document.getElementById("myInput");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("myTable");
+            tr = table.getElementsByTagName("tr");
+            for (i = 0; i < tr.length; i++) {
+                td0 = tr[i].getElementsByTagName("td")[0];
+                td1 = tr[i].getElementsByTagName("td")[1];
+                td2 = tr[i].getElementsByTagName("td")[2];
+                if (td0) {
+                    txtValue0 = td0.textContent || td.innerText;
+                    txtValue1 = td1.textContent || td.innerText;
+                    txtValue2 = td2.textContent || td.innerText;
+                    if (txtValue0.toUpperCase().indexOf(filter) > -1 || txtValue1.toUpperCase().indexOf(filter) > -1 || txtValue2.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                    } else {
+                        tr[i].style.display = "none";
+                    }
+                }
+            }
+        }
+    </script>
+
+{% endblock %}
+

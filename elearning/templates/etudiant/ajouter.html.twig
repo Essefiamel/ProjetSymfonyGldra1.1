@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <style>
+        .container {
+            padding: 16px;
+            width: 80%;
+            border: 1px solid #ccc;
+            margin: 24px 0 12px 50px;
+        }
+    </style>
+    <div class="panel panel-primary">
+
+        <div class="panel-body">
+            <h2>Ajouter Etudiant</h2>
+            <div class="container">
+                {{ form_start(form) }}
+                {{ form_row(form.Niveau,{'label': 'Niveau','attr':{'placeholder': 'Libellé niveau'}}) }}
+                <div>
+                {{ form_row(form.User,{'label': 'User','attr':{'placeholder': 'user'}}) }}
+                </div>
+                {{ form_row(form.Matricule,{'label': 'Matricule','attr':{'placeholder': 'Description'}}) }}
+                <button type="submit" class="btn btn-success">Valider</button>
+            </div>
+
+        </div>
+    </div>
+
+
+    </div>
+    {{ form_end(form) }}
+{% endblock %}
+

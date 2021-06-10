@@ -1,0 +1,133 @@
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Add icon library -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<style>
+    img.avatar {
+        width: 20%;
+        border-radius: 50%;
+    }
+    .button {
+        background-color: rgba(115, 128, 115, 0.99);
+        border: none;
+        color: white;
+        padding: 15px 20px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 13px;
+        margin: 4px 2px;
+        cursor: pointer;
+        width: 75%;
+        border-radius: 2%;
+
+    }
+
+
+    .imgcontainer {
+        text-align: center;
+        margin: 24px 0 12px 0;
+    }
+    .container {
+        padding: 16px;
+        width: 25%;
+        border: 1px solid rgba(115, 128, 115, 0.99);
+        margin: 100px 0 50px 50px;
+    }
+    .input-container {
+        display: -ms-flexbox; /* IE10 */
+        display: flex;
+        width: 100%;
+        margin-bottom: 15px;
+    }
+    .btn:hover {
+        opacity: 1;
+    }
+    .icon {
+        padding: 10px;
+        background: rgba(115, 128, 115, 0.99);
+        color: white;
+        min-width: 50px;
+        text-align: center;
+    }
+    .input-field {
+        width: 100%;
+        padding: 10px;
+        outline: none;
+    }
+
+    .input-field:focus {
+        border: 2px solid rgba(115, 128, 115, 0.99);
+    }
+
+    /* Set a style for the submit button */
+    .btn {
+        background-color: rgba(115, 128, 115, 0.99);
+        color: white;
+        padding: 15px 20px;
+        border: none;
+        cursor: pointer;
+        width: 100%;
+        opacity: 0.9;
+    }
+    span.psw {
+        float: right;
+        padding-top: 16px;
+    }
+
+    /* Change styles for span and cancel button on extra small screens */
+    @media screen and (max-width: 300px) {
+        span.psw {
+            display: block;
+            float: none;
+        }
+        .cancelbtn {
+            width: 100%;
+        }
+    }
+
+</style>
+<body>
+{% block body %}
+<center>
+    <div class="container">
+
+        <div class="imgcontainer">
+            <img src="{{ asset('img/img1.jpg') }}" class="avatar"/>
+
+        </div>
+        <h5>Authentification</h5>
+    <form action="{{ path('loginLink') }}" method="post">
+        <div class="imgcontainer">
+
+            <div class="input-container">
+                <i class="fa fa-user icon"></i>
+                <input class="input-field" type="text" placeholder="Nom utilisateur" required name="_username">
+            </div>
+            <div class="input-container">
+                <i class="fa fa-key icon"></i>
+                <input class="input-field" type="password" placeholder="Mot de passe" required name="_password">
+            </div>
+
+        </div>
+
+        <button type="submit" class="btn"><b>Connexion</b></button></button>
+        <br>
+        <a href="{{ path('Security_registration')}}">Sinscrire</a><br>
+        <a href="{{ path('app_forgot_password_request')}}">Mot de passe oublié</a>
+    </form>
+
+    </div>
+</center>
+{% endblock %}
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+
+</body>

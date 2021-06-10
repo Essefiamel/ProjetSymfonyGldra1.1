@@ -1,0 +1,128 @@
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+
+    <a class="navbar-brand" href="#"><h1>e-learning</h1></a>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+            <ul class="navbar-nav mr-auto">
+
+                <li class="nav-item active">
+                    <a class="nav-link" href="{{ path('homeLink') }}"><i class="fa fa-home"></i>   Home<span class="sr-only">(current)</span></a>
+                </li>
+                {% if is_granted("ROLE_ADMIN") %}
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fa fa-users"></i>   Les Utilisateurs
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="{{path('Security_registration')}}"><i class="fa fa-user-plus" aria-hidden="true"></i>  Ajouter</a>
+                            <a class="dropdown-item" href="{{path('alluserslink')}}"><i class="fa fa-fw fa-list"></i>  Lister/Editer</a>
+
+                    </div>
+                </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fa fa-users"></i>   Les Tuteurs
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="{{path('addtuteurlink')}}"><i class="fa fa-user-plus" aria-hidden="true"></i>  Ajouter</a>
+                            <a class="dropdown-item" href="{{path('alltuteurslink')}}"><i class="fa fa-user-o"></i>  Lister/Editer</a>
+
+                        </div>
+                    </li>
+                {%  endif %}
+                {% if is_granted("ROLE_ADMIN") %}
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fa fa-users"></i>   Les etudiants
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="{{path('addetudiantlink')}}"><i class="fa fa-user-plus" aria-hidden="true"></i>  Ajouter</a>
+                            <a class="dropdown-item" href="{{path('alletudiantslink')}}"><i class="fa fa-fw fa-list"></i>  Lister/Editer</a>
+
+                        </div>
+                    </li>
+                {%  endif %}
+                {% if is_granted("ROLE_EDITOR") or is_granted("ROLE_USER")  %}
+                    {% if app.user.actif==1 %}
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fa fa-folder-open-o"></i>   Mon espace
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            {% if is_granted("ROLE_USER") or is_granted("ROLE_EDITOR") %}
+                                {% if is_granted("ROLE_EDITOR") %}
+                                <a class="dropdown-item" href="{{ path('mescourslink',{id: app.user.id})}} }}"><i class="fa fa-plus-square-o" aria-hidden="true"></i>  Mes cours</a>
+                                {%  endif %}
+                                {% if is_granted("ROLE_USER") %}
+                                    <a class="dropdown-item" href="{{ path('mescoursetudiantlink',{id: app.user.id})}} }}"><i class="fa fa-plus-square-o" aria-hidden="true"></i>  Mes cours</a>
+                                {%  endif %}
+                                 <a class="dropdown-item" href="#"><i class="fa fa-envelope"></i> Boite mail</a>
+                                <a class="dropdown-item" href="#"><i class="fa fa-calendar"></i> Mon calendrier</a>
+                                {% if is_granted("ROLE_EDITOR") %}
+                                <a class="dropdown-item" href="{{ path('mesgroupeslink',{id: app.user.id})}} }}"><i class="fa fa-fw fa-list"></i> Mes groupes</a>
+                            {%  endif %}
+                            {%  endif %}
+
+                            </div>
+                    </li>
+                {%  endif %}
+                {%  endif %}
+                {% if is_granted("ROLE_ADMIN") %}
+                <li class="nav-item dropdown">
+
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fa fa-window-restore" aria-hidden="true"></i>   Les Groupes
+                    </a>
+
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="{{path('addniveaulink')}}"><i class="fa fa-plus-square-o" aria-hidden="true"></i>  Ajouter</a>
+                        <a class="dropdown-item" href="{{path('allniveauxlink')}}"><i class="fa fa-fw fa-list"></i>  Lister/Editer</a>
+                    </div>
+
+                </li>
+                {%  endif %}
+
+
+                {% if is_granted("ROLE_ADMIN") %}
+                    <li class="nav-item dropdown">
+
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fa fa-line-chart"></i>   Les Matieres
+
+                        </a>
+
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="{{path('AddMatiereLink')}}"><i class="fa fa-plus-square-o" aria-hidden="true"></i>   Ajouter</a>
+                            <a class="dropdown-item" href="{{ path('allmatiereslink') }}"><i class="fa fa-fw fa-list"></i>   Lister/Editer</a>
+                        </div>
+                    </li>
+                {% endif %}
+                {% if app.user  %}
+                <li class="nav-item active">
+                    <a class="nav-link" href="{{ path('editeruserlink',{id: app.user.id})}}"><i class="fa fa-user"></i>Mon profil<span class="sr-only">(current)</span></a>
+                </li>
+                 {% endif %}
+
+            </ul>
+        <form class="form-inline my-2 my-lg-0">
+            {% if not app.user  %}
+                <li class="nav-item active">
+                    <a class="nav-link" href="{{ path('loginLink') }}"><i class="fa fa-sign-in"></i>Login<span class="sr-only">(current)</span></a>
+                </li>
+            {% else %}
+                <li class="nav-item active">
+                    <a class="nav-link" href="{{ path('logoutLink') }}"><i class="fa fa-sign-out"></i>Logout<span class="sr-only">(current)</span></a>
+                </li>
+
+            {% endif %}
+            
+        </form>
+    </div>
+
+</nav>
+{% block body %}
+
+{% endblock %}

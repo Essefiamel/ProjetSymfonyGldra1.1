@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+ <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <style>
+
+        body {
+
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+            margin: 20px;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+
+    </style>
+
+            <div class="container">
+
+
+            </div>
+
+
+
+
+
+
+
+
+<div>
+    <h2>Mes cours</h2>
+        {% for matiere in lesmatieres %}
+            <ul class="list-group">
+                <li class="list-group-item d-flex justify-content-between align-items-center">  <a href="{{path('courssectionslink',{id: matiere.id})}}">{{matiere.libelle}}</a>
+                </li>
+
+            </ul>
+        {% else %}
+<ul class="b">
+                <li>Aucun cours</li>
+</ul>
+        {% endfor %}
+</div>
+
+
+{% endblock %}
+

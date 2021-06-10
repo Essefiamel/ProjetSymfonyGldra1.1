@@ -1,0 +1,111 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <style>
+        ul.a {
+            list-style-type: circle;
+        }
+
+        ul.b {
+            list-style-type: square;
+        }
+
+        ol.c {
+            list-style-type: upper-roman;
+        }
+
+        ol.d {
+            list-style-type: lower-alpha;
+        }
+        body {
+
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+            margin: 20px;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        #myInput {
+            background-repeat: no-repeat;
+            width: 100%;
+            font-size: 16px;
+            padding: 12px 20px 12px 40px;
+            border: 1px solid #ddd;
+            margin-bottom: 12px;
+
+
+        }
+        .container {
+            padding: 10px;
+            width: 80%;
+            border: 1px solid #ccc;
+            margin: 15px 0 12px 20px;
+        }
+        .main {
+            width: 50%;
+            margin: 50px auto;
+            left: 20px;
+            position: relative;
+        }
+
+        /* Bootstrap 3 text input with search icon */
+
+        .has-search .form-control-feedback {
+            right: 100px;
+            left: 0;
+            color: #ccc;
+        }
+
+        .has-search .form-control {
+            padding-right: 12px;
+            padding-left: 34px;
+
+        }
+
+    </style>
+
+
+
+
+
+    <div class="main">
+
+        <!-- Actual search box -->
+        <div class="form-group has-feedback has-search" style=" left: -400px;
+        position: relative;">
+            <span class="glyphicon glyphicon-search form-control-feedback"></span>
+            <div class="container">
+            <h4>Cours de :  {{ etudiant.User.fullname }} </h4>
+            <h4>Niveau :  {{ etudiant.Niveau.libelle }} </h4>
+            </div>
+            </div>
+
+    </div>
+<div class="container">
+
+
+
+        <tbody>
+        {% for matiere in lesmatieres %}
+            <ul class="b">
+               <li><a href="{{path('sectionsetudiantlink',{id: matiere.id})}}">{{matiere.libelle}}</a></li>
+                {% for tuteur in lestuteurs %}
+
+                    {% if matiere in tuteur.matiere %}
+                        enseigné par : {{ tuteur.User.fullname }}
+
+                    {% endif %}
+                {% endfor %}
+            </ul>
+
+        {% endfor %}
+
+
+</div>
+
+
+{% endblock %}
+

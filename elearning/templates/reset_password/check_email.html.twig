@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Password Reset Email Sent{% endblock %}
+
+{% block body %}
+    <style>
+        .container {
+            padding: 16px;
+            width: 80%;
+            border: 1px solid #ccc;
+            margin: 24px 0 12px 50px;
+        }
+        form_container
+        {
+            width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        span.form_column
+        {
+            float: left;
+            width: 200px;
+            text-align: left;
+        }
+
+        span.form_label
+        {
+            width: 50px;
+            text-align: right;
+
+        }
+
+        form_row
+        {
+            font-size: large;
+            margin-top: 10px;
+            margin-bottom: 5px;
+            text-align: left;
+            clear: left;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+    </style>
+<div class="container">
+    <p>An email has been sent that contains a link that you can click to reset your password. This link will expire in {{ tokenLifetime|date('g') }} hour(s).</p>
+    <p>If you don't receive an email please check your spam folder or <a href="{{ path('app_forgot_password_request') }}">try again</a>.</p>
+</div>
+    {% endblock %}

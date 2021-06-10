@@ -1,0 +1,130 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <style>
+
+        body {
+
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+            margin: 20px;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        #myInput {
+            background-repeat: no-repeat;
+            width: 100%;
+            font-size: 16px;
+            padding: 12px 20px 12px 40px;
+            border: 1px solid #ddd;
+            margin-bottom: 12px;
+
+
+        }
+        .container {
+            padding: 10px;
+            width: 80%;
+            border: 1px solid #ccc;
+            margin: 15px 0 12px 20px;
+        }
+        .main {
+            width: 50%;
+            margin: 50px auto;
+            left: 20px;
+            position: relative;
+        }
+
+        /* Bootstrap 3 text input with search icon */
+
+        .has-search .form-control-feedback {
+            right: 100px;
+            left: 0;
+            color: #ccc;
+        }
+
+        .has-search .form-control {
+            padding-right: 12px;
+            padding-left: 34px;
+
+        }
+
+    </style>
+
+
+
+
+
+    <div class="main">
+
+        <!-- Actual search box -->
+        <div class="form-group has-feedback has-search" style=" left: -400px;
+        position: relative;">
+            <span class="glyphicon glyphicon-search form-control-feedback"></span>
+            <div class="container">
+                <h4>Cours d :  {{ etudiant.User.fullname }} </h4>
+                <h4>Niveau :  {{ etudiant.Niveau.libelle }} </h4>
+            </div>
+        </div>
+
+    </div>
+    <div class="container">
+
+        <table id="myTable" class="table" border="1">
+            <thead class="thead-dark">
+            <tr>
+                <th> Id-Cours</th>
+                <th> Libelle</th>
+                <th> Description</th>
+                <th> </th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for matiere in lesmatieres %}
+                <tr>
+                    <td>{{matiere.id}}</td>
+                    <td><li><a href="{{path('sectionsetudiantlink',{id: matiere.id})}}">{{matiere.libelle}}</a></li>
+                    </td>
+                    <td>{{matiere.description}}</td>
+
+                    <td>
+                        <a class="btn btn-danger" style="background-color: #565656;border-color: #565656" href="{{'#'}}" onclick="return confirm('Etes vous sure de vouloir supprimer ?')">Supprimer</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="5">Aucun cours</td>
+                </tr>
+            {% endfor %}
+
+        </table>
+    </div>
+    <script>
+        function myFunction() {
+            var input, filter, table, tr, td0,td1,td2,td3,td4, i, txtValue0,txtValue1;
+            input = document.getElementById("myInput");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("myTable");
+            tr = table.getElementsByTagName("tr");
+            for (i = 0; i < tr.length; i++) {
+                td0 = tr[i].getElementsByTagName("td")[0];
+                td1 = tr[i].getElementsByTagName("td")[1];
+                td2 = tr[i].getElementsByTagName("td")[2];
+                if (td0) {
+                    txtValue0 = td0.textContent || td.innerText;
+                    txtValue1 = td1.textContent || td.innerText;
+                    txtValue2 = td2.textContent || td.innerText;
+                    if (txtValue0.toUpperCase().indexOf(filter) > -1 || txtValue1.toUpperCase().indexOf(filter) > -1 || txtValue2.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                    } else {
+                        tr[i].style.display = "none";
+                    }
+                }
+            }
+        }
+    </script>
+
+{% endblock %}
+

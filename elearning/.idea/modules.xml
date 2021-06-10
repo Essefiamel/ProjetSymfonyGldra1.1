@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/Tigers.iml" filepath="$PROJECT_DIR$/.idea/Tigers.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../WebSchool/.idea/WebSchool.iml" filepath="$PROJECT_DIR$/../WebSchool/.idea/WebSchool.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../profmat/.idea/profmat.iml" filepath="$PROJECT_DIR$/../profmat/.idea/profmat.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../reset-password-bundle-master/.idea/reset-password-bundle-master.iml" filepath="$PROJECT_DIR$/../reset-password-bundle-master/.idea/reset-password-bundle-master.iml" />
+    </modules>
+  </component>
+</project>

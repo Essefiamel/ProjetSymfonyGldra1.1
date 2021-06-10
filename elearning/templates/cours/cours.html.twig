@@ -1,0 +1,193 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <style>
+            body {
+                font-family: Arial;
+                font-size: 17px;
+                padding: 8px;
+            }
+
+            * {
+                box-sizing: border-box;
+            }
+
+            .row {
+                display: -ms-flexbox; /* IE10 */
+                display: flex;
+                -ms-flex-wrap: wrap; /* IE10 */
+                flex-wrap: wrap;
+                margin: 0 -16px;
+            }
+
+            .col-25 {
+                -ms-flex: 25%; /* IE10 */
+                flex: 25%;
+            }
+
+            .col-50 {
+                -ms-flex: 50%; /* IE10 */
+                flex: 50%;
+            }
+
+            .col-75 {
+                -ms-flex: 75%; /* IE10 */
+                flex: 75%;
+            }
+
+            .col-25,
+            .col-50,
+            .col-75 {
+                padding: 0 16px;
+            }
+
+            .container {
+                background-color: #f2f2f2;
+                padding: 5px 20px 15px 20px;
+                border: 1px solid lightgrey;
+                border-radius: 3px;
+            }
+
+            input[type=text] {
+                width: 100%;
+                margin-bottom: 10px;
+                padding: 12px;
+                border: 1px solid #ccc;
+                border-radius: 3px;
+            }
+
+            label {
+                margin-bottom: 10px;
+                display: block;
+            }
+
+            .icon-container {
+                margin-bottom: 20px;
+                padding: 7px 0;
+                font-size: 24px;
+            }
+
+            .btn {
+                background-color: #4CAF50;
+                color: white;
+                padding: 12px;
+                margin: 10px 0;
+                border: none;
+                width: 100%;
+                border-radius: 3px;
+                cursor: pointer;
+                font-size: 17px;
+            }
+
+            .btn:hover {
+                background-color: #45a049;
+            }
+
+            a {
+                color: #2196F3;
+            }
+
+            hr {
+                border: 1px solid lightgrey;
+            }
+
+            span.price {
+                float: right;
+                color: grey;
+            }
+
+            /* Responsive layout - when the screen is less than 800px wide, make the two columns stack on top of each other instead of next to each other (also change the direction - make the "cart" column go on top) */
+            @media (max-width: 800px) {
+                .row {
+                    flex-direction: column-reverse;
+                }
+                .col-25 {
+                    margin-bottom: 10px;
+                }
+            }
+        </style>
+    </head>
+
+
+
+    <div class="container">
+        <h2>Ajouter cours</h2>
+        {{ form_start(form) }}
+        {{ form_row(form.libelle,{'label': 'Libellé cours','attr':{'placeholder': 'Libelle'}}) }}
+        {{ form_row(form.optionelle,{'label': 'Optionelle','attr':{'placeholder': 'Optionelle'}}) }}
+        {{ form_row(form.description,{'label': 'Description','attr':{'placeholder': 'Description'}}) }}
+        <button type="submit" class="btn btn-success">Valider</button>
+    </div>
+
+    </div>
+
+
+    {{ form_end(form) }}
+    <div class="main">
+
+        <!-- Actual search box -->
+        <div class="form-group has-feedback has-search" style=" left: -400px;
+        position: relative;">
+            <span class="glyphicon glyphicon-search form-control-feedback"></span>
+            <input type="text" id="myInput" onkeyup="myFunction()" class="form-control" placeholder="Récherche multi-critères (id, département, libellé)">
+        </div>
+
+    </div>
+    <table id="myTable" class="table" border="1">
+        <thead class="thead-dark">
+        <tr>
+
+            <th> Id-User</th>
+            <th> Id-Tuteur</th>
+            <th> Nom</th>
+            <th> Prénom</th>
+            <th> </th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for tuteur in lestuteurs %}
+            <tr>
+                <td>{{tuteur.User.id}}</td>
+                <td>{{tuteur.id}}</td>
+                <td>{{tuteur.User.nom}}</td>
+                <td>{{tuteur.User.prenom}}</td>
+                <td>
+                    <a class="btn btn-danger" style="background-color: #565656;border-color: #565656" href="{{'#'}}" onclick="return confirm('Etes vous sure de vouloir supprimer ?')">Supprimer</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">Aucun etudiant</td>
+            </tr>
+        {% endfor %}
+
+    </table>
+    <script>
+        function myFunction() {
+            var input, filter, table, tr, td0,td1,td2,td3,td4, i, txtValue0,txtValue1;
+            input = document.getElementById("myInput");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("myTable");
+            tr = table.getElementsByTagName("tr");
+            for (i = 0; i < tr.length; i++) {
+                td0 = tr[i].getElementsByTagName("td")[0];
+                td1 = tr[i].getElementsByTagName("td")[1];
+                td2 = tr[i].getElementsByTagName("td")[2];
+                if (td0) {
+                    txtValue0 = td0.textContent || td.innerText;
+                    txtValue1 = td1.textContent || td.innerText;
+                    txtValue2 = td2.textContent || td.innerText;
+                    if (txtValue0.toUpperCase().indexOf(filter) > -1 || txtValue1.toUpperCase().indexOf(filter) > -1 || txtValue2.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                    } else {
+                        tr[i].style.display = "none";
+                    }
+                }
+            }
+        }
+    </script>
+{% endblock %}
+
